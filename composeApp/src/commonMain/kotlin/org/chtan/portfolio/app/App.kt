@@ -14,6 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import coil3.compose.AsyncImage
 import org.chtan.portfolio.Greeting
+import org.chtan.portfolio.myprofile.presentation.dashboard.Dashboard
 import org.chtan.portfolio.myprofile.presentation.dashboard.home.home
 import org.chtan.portfolio.myprofile.presentation.theme.PortfolioTheme
 import org.jetbrains.compose.resources.painterResource
@@ -27,8 +28,8 @@ import portfolio.composeapp.generated.resources.compose_multiplatform
 fun App() {
     PortfolioTheme {
         var showContent by remember { mutableStateOf(false) }
-
-        home()
+        Dashboard()
+      //  home()
 //        Column(
 //            modifier = Modifier
 //                .safeContentPadding()

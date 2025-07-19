@@ -7,9 +7,8 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.FlowRow
-import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -17,18 +16,19 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.automirrored.filled.Message
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material3.Button
-import androidx.compose.material3.Card
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -42,181 +42,149 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import kotlinx.coroutines.launch
+import org.chtan.portfolio.myprofile.data.MyLocalData
+import org.chtan.portfolio.myprofile.data.ProjectDetail
 import org.chtan.portfolio.myprofile.presentation.utils.addResizeListener
 import org.chtan.portfolio.myprofile.presentation.utils.getWindowHeightWidth
 import org.chtan.portfolio.myprofile.presentation.utils.openLink
-import org.jetbrains.compose.resources.DrawableResource
-import org.jetbrains.compose.resources.Font
 import org.jetbrains.compose.resources.painterResource
-import portfolio.composeapp.generated.resources.ArianaVioleta_dz2K
 import portfolio.composeapp.generated.resources.Res
 import portfolio.composeapp.generated.resources.icons8_facebook
 import portfolio.composeapp.generated.resources.icons8_github
 import portfolio.composeapp.generated.resources.icons8_linkedin
 
-data class ProjectDetail(
-    val projectName: String,
-    val projectDescription: String,
-    val projectTechnologies: String,
-    val projectImage: List<DrawableResource>,
-    val projectLink: String?,
-    val projectSourceCode: String?,
-    val projectType: String?,
-    val projectSubType: String?,
-    val projectNote: String?
-)
-
 
 @Composable
 fun home() {
-    val viewWidhtHeight = remember {mutableStateOf<Pair<Int, Int>>(getWindowHeightWidth())}
+    val viewWidhtHeight = remember { mutableStateOf<Pair<Int, Int>>(getWindowHeightWidth()) }
 
     addResizeListener { viewport ->
         viewWidhtHeight.value = viewport
     }
 
-    val boxCardModifier = if (viewWidhtHeight.value.first > 400) Modifier.width(400.dp) else Modifier.fillMaxWidth()
+    val boxCardModifier =
+        if (viewWidhtHeight.value.first > 400) Modifier.width(400.dp) else Modifier.fillMaxWidth()
     Column(
-        modifier = Modifier.fillMaxSize()
-            .padding(horizontal = 10.dp)
-            .animateContentSize()
-            .verticalScroll(rememberScrollState())
+        modifier = Modifier.fillMaxSize().animateContentSize().verticalScroll(rememberScrollState())
     ) {
         val myIcons = listOf(
-            Res.drawable.icons8_facebook, Res.drawable.icons8_github, Res.drawable.icons8_linkedin
+            Res.drawable.icons8_facebook to "https://www.facebook.com/besotted.chtan/", Res.drawable.icons8_github to "https://github.com/chtankhadka", Res.drawable.icons8_linkedin to "https://www.linkedin.com/feed/"
         )
+
+        // My descriptions
+
+        Row(
+            modifier = Modifier.fillMaxSize(), verticalAlignment = Alignment.CenterVertically
+        ) {
             FlowRow(
-                modifier = Modifier.padding(vertical = 10.dp),
+                modifier = Modifier.padding(8.dp).weight(1f),
                 horizontalArrangement = Arrangement.SpaceAround,
-                verticalArrangement = Arrangement.Center
+                verticalArrangement = Arrangement.spacedBy(10.dp),
+                itemVerticalAlignment = Alignment.CenterVertically
             ) {
-                Text(
-                    text = "Chetan", style = MaterialTheme.typography.titleLarge.copy(
-                        fontFamily = FontFamily(Font(Res.font.ArianaVioleta_dz2K)), fontSize = 36.sp
-                    ), modifier = Modifier.weight(0.5f)
-                )
-                FlowRow(
-                    modifier = Modifier, horizontalArrangement = Arrangement.spacedBy(10.dp)
+                Box(
+                    modifier = boxCardModifier
+
                 ) {
-                    listOf("Home", "About", "Skills", "Projects", "Contact").forEach { item ->
-                        Text(
-                            text = item, style = MaterialTheme.typography.headlineMedium
-                        )
-
-                    }
-
-
-                }
-            }
-
-            // My descriptions
-
-            Row(
-                modifier = Modifier.fillMaxSize(),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                FlowRow(
-                    modifier = Modifier.padding(8.dp).weight(1f),
-                    horizontalArrangement = Arrangement.SpaceAround,
-                    verticalArrangement = Arrangement.SpaceAround,
-                    itemVerticalAlignment = Alignment.CenterVertically
-                ) {
-                    Box(
-                        modifier = boxCardModifier
-
-                    ) {
                         AsyncImage(
-                            modifier = Modifier.align(alignment = Alignment.Center).size(400.dp)
-                                .padding(4.dp).clip(CircleShape),
-                            model = "https://scontent.fsou1-1.fna.fbcdn.net/v/t39.30808-6/480932282_1436233244458586_1310469937094892216_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=pJGnS0c2Z58Q7kNvwGZFw4q&_nc_oc=AdlSY3tAR5xAswZLv2qAkOB-pOYvUugop5GfNbOz00wiF99_JDEhYBxLVWSpCF7hvSg&_nc_zt=23&_nc_ht=scontent.fsou1-1.fna&_nc_gid=AFlx6FHNgwR7xhMvTFJ32Q&oh=00_AfSHcs39h6nI4WYr_PXkG7CWFvcnd3w7NuMaSXDi7PIrQA&oe=687D6B2F",
-                            contentDescription = "Image"
-                        )
-                    }
+                            modifier = Modifier.align(alignment = Alignment.Center).padding(10.dp).clip(shape = RoundedCornerShape(10)).size(300.dp),
+                            model = "https://scontent.fsou1-1.fna.fbcdn.net/v/t39.30808-6/520092422_1542752410473335_5806185386542453646_n.jpg?stp=cp6_dst-jpegr_tt6&_nc_cat=100&ccb=1-7&_nc_sid=f727a1&_nc_ohc=cyJdSvdxp7wQ7kNvwEXiP6e&_nc_oc=AdkuOs8m90_aJXqJzBfCKoR5PZgbuJkM-vwzmjg8wRD-Pcbu6np-WyLSbIRQ23bbw5nwIF1Pz7lVQymXGkY1kJ2g&_nc_zt=23&se=-1&_nc_ht=scontent.fsou1-1.fna&_nc_gid=T8YIdTT00KdKbWK1Fz--7A&oh=00_AfSwa-3LJbPsVF28VfmXjxSynKvEwapRdYi6h9eNHtamPA&oe=688096CE",
+                            contentDescription = "Image",
+                            contentScale = ContentScale.Crop
 
 
-                    Column(
-                        modifier = boxCardModifier,
-                        verticalArrangement = Arrangement.Center.also { Arrangement.spacedBy(10.dp) }
-                    ) {
-                        Text(
-                            text = "Hello, I'm Chetan Khadka",
-                            style = MaterialTheme.typography.headlineLarge
+
                         )
-                        Text(text = "Application Developer & Data Analyst")
-                        Text(text = "High level experience in mobile app development and data analysis, and producing quality work")
-                        Button(
-                            onClick = { }, modifier = Modifier.padding(8.dp)
-                        ) {
-                            Text(text = "Contact Me")
-                            Icon(
-                                imageVector = Icons.AutoMirrored.Filled.Message,
-                                contentDescription = "contact me"
-                            )
-                        }
-                    }
+
 
                 }
 
-                Column(modifier = Modifier) {
-                    myIcons.forEach { item ->
-                        IconButton(onClick = {
-                            openLink("https://www.linkedin.com/feed/")
-                        }) {
-                            Image(
-                                modifier = Modifier.size(50.dp),
-                                painter = painterResource(item),
-                                contentDescription = null
-                            )
-                        }
 
+                Column(
+                    modifier = boxCardModifier,
+                    verticalArrangement = Arrangement.Center.also { Arrangement.spacedBy(10.dp) }) {
+                    Text(
+                        text = "Hello, I'm Chetan Khadka",
+                        style = MaterialTheme.typography.headlineLarge
+                    )
+                    Text(text = "Application Developer & Data Analyst")
+                    Text(text = "High level experience in mobile app development and data analysis, and producing quality work")
+                    Button(
+                        onClick = { }, modifier = Modifier.padding(8.dp)
+                    ) {
+                        Text(text = "Contact Me")
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.Message,
+                            contentDescription = "contact me"
+                        )
                     }
                 }
 
             }
 
+            Column(modifier = Modifier) {
+                myIcons.forEach { item ->
+                    IconButton(onClick = {
+                        openLink(item.second)
+                    }) {
+                        Image(
+                            modifier = Modifier.size(50.dp),
+                            painter = painterResource(item.first),
+                            contentDescription = null
+                        )
+                    }
 
+                }
+            }
+
+        }
 
 
         // work report
-
-        myPager(myIcons,boxCardModifier)
+        MyLocalData.listOfAPPSkills.forEach { project ->
+            myPager(data = project, boxCardModifier)
+            Spacer(modifier = Modifier.height(10.dp))
+        }
 
 
     }
 }
 
 @Composable
-fun myPager(myIcons: List<DrawableResource>, BoxCardModifier: Modifier) {
+fun myPager(data: ProjectDetail, boxCardModifier: Modifier) {
     val pagerState = rememberPagerState(pageCount = {
-        myIcons.size
+        data.projectImage.size
     })
 
     val scope = rememberCoroutineScope()
-    ElevatedCard(modifier = Modifier.fillMaxWidth()) {
+    ElevatedCard(
+        modifier = Modifier.fillMaxWidth(),
+        colors = CardDefaults.cardColors(containerColor = data.color)
+    ) {
         FlowRow(
             modifier = Modifier.fillMaxWidth().padding(vertical = 10.dp),
             horizontalArrangement = Arrangement.SpaceAround,
-            verticalArrangement = Arrangement.Center,
+            verticalArrangement = Arrangement.spacedBy(10.dp),
             itemVerticalAlignment = Alignment.CenterVertically
 
 
         ) {
             Box(
-                modifier = BoxCardModifier
+                modifier = boxCardModifier
             ) {
                 HorizontalPager(
                     state = pagerState, modifier = Modifier.fillMaxSize()
                 ) { page ->
 
                     Box(modifier = Modifier.size(400.dp)) {
-                        Image(
-                            modifier = Modifier.fillMaxSize(),
-                            painter = painterResource(myIcons[page]),
+                        AsyncImage(
+                            modifier = Modifier.fillMaxSize().align(Alignment.Center),
+                            model = data.projectImage[page],
                             contentDescription = null,
                         )
                     }
@@ -234,8 +202,12 @@ fun myPager(myIcons: List<DrawableResource>, BoxCardModifier: Modifier) {
                         )
                     }
                 }
-                IconButton(
-                    modifier = Modifier.align(alignment = Alignment.BottomStart), onClick = {
+                Button(
+                    modifier = Modifier.align(alignment = Alignment.CenterStart),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = data.color
+                    ),
+                    onClick = {
                         if (pagerState.currentPage == 0) {
                             scope.launch {
                                 pagerState.animateScrollToPage(pagerState.pageCount - 1)
@@ -247,10 +219,17 @@ fun myPager(myIcons: List<DrawableResource>, BoxCardModifier: Modifier) {
                             }
                         }
                     }) {
-                    Icon(imageVector = Icons.Default.ArrowBack, contentDescription = null)
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Filled.KeyboardArrowLeft,
+                        contentDescription = null
+                    )
                 }
-                IconButton(
-                    modifier = Modifier.align(alignment = Alignment.BottomEnd), onClick = {
+                Button(
+                    modifier = Modifier.align(alignment = Alignment.CenterEnd),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = data.color
+                    ),
+                    onClick = {
                         if (pagerState.currentPage == pagerState.pageCount - 1) {
                             scope.launch {
                                 pagerState.animateScrollToPage(0)
@@ -261,22 +240,46 @@ fun myPager(myIcons: List<DrawableResource>, BoxCardModifier: Modifier) {
                             }
                         }
                     }) {
-                    Icon(imageVector = Icons.Default.ArrowForward, contentDescription = null)
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
+                        contentDescription = null
+                    )
                 }
             }
 
             Column(
-                modifier = BoxCardModifier,
-                verticalArrangement = Arrangement.Center.also { Arrangement.spacedBy(10.dp) }
-            ) {
+                modifier = boxCardModifier,
+                verticalArrangement = Arrangement.Center.also { Arrangement.spacedBy(10.dp) }) {
+                Row(modifier = Modifier.wrapContentHeight(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(5.dp)) {
+                    Text(
+                        text = data.projectName, style = MaterialTheme.typography.headlineLarge.copy(
+                            color = data.fontColor, fontSize = 30.sp
+                        )
+                    )
+                    IconButton(onClick = {
+                        openLink(data.projectSourceCode?:"")
+                    }) {
+                        Image(
+                            modifier = Modifier.size(30.dp),
+                            painter = painterResource(Res.drawable.icons8_github),
+                            contentDescription = null
+                        )
+                    }
+
+
+                }
+
                 Text(
-                    text = "MoMo Bar (Restaurant App)", style = MaterialTheme.typography.headlineMedium
+                    text = data.projectDescription
                 )
+                Spacer(modifier = Modifier.height(10.dp))
                 Text(
-                    text = "Used for a food ordering app where users can order food, request delivery times, and hotels can \nview customer locations."
+                    text = "Technologies and tools:",
+                    style = MaterialTheme.typography.headlineLarge.copy(color = data.fontColor)
                 )
-                Text(text = "Technologies and tools:", style = MaterialTheme.typography.headlineMedium)
-                Text(text = "Kotlin Multiplatform, Koin, Jetpack Compose, MVI architecture, Git, AWS, Rest APIs, Ktor HTTP client etc")
+                Text(text = data.projectTechnologies)
             }
         }
     }
