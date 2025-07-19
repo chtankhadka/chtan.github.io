@@ -88,3 +88,13 @@ object MyLocalData{
         ),
     )
 }
+
+sealed class MyTopBar(
+    val label : String,
+    val id: String
+){
+    data object Home: MyTopBar(label = "Home", id = "home")
+    data object About: MyTopBar(label = "About Me", id = "about_me")
+    data object Skills: MyTopBar(label = "Skills", id = "skills")
+    data object Ideas: MyTopBar(label = "Ideas", id = "ideas")
+}

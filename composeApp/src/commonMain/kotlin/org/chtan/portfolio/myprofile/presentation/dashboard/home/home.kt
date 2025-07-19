@@ -49,6 +49,7 @@ import coil3.compose.AsyncImage
 import kotlinx.coroutines.launch
 import org.chtan.portfolio.myprofile.data.MyLocalData
 import org.chtan.portfolio.myprofile.data.ProjectDetail
+import org.chtan.portfolio.myprofile.presentation.components.MyDropDownItems
 import org.chtan.portfolio.myprofile.presentation.utils.addResizeListener
 import org.chtan.portfolio.myprofile.presentation.utils.getWindowHeightWidth
 import org.chtan.portfolio.myprofile.presentation.utils.openLink
@@ -60,7 +61,7 @@ import portfolio.composeapp.generated.resources.icons8_linkedin
 
 
 @Composable
-fun home() {
+fun home(choosenSkills: MyDropDownItems) {
     val viewWidhtHeight = remember { mutableStateOf<Pair<Int, Int>>(getWindowHeightWidth()) }
 
     addResizeListener { viewport ->
@@ -112,17 +113,9 @@ fun home() {
                         text = "Hello, I'm Chetan Khadka",
                         style = MaterialTheme.typography.headlineLarge
                     )
-                    Text(text = "Application Developer & Data Analyst")
-                    Text(text = "High level experience in mobile app development and data analysis, and producing quality work")
-                    Button(
-                        onClick = { }, modifier = Modifier.padding(8.dp)
-                    ) {
-                        Text(text = "Contact Me")
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.Message,
-                            contentDescription = "contact me"
-                        )
-                    }
+                    Text(text = "Application Developer & Data Analyst", style = MaterialTheme.typography.headlineSmall)
+                    Text(text = "having High level experience in mobile app development with 3 years of experience and data analysis with 6 months of experience, and producing quality work")
+
                 }
 
             }
@@ -146,7 +139,7 @@ fun home() {
 
 
         // work report
-        MyLocalData.listOfAPPSkills.forEach { project ->
+        MyLocalData.listOfAPPSkills.filter { if (choosenSkills.type != "All") it.projectType == choosenSkills.type else it.projectType == "App" || it.projectType == "Data" }.forEach { project ->
             myPager(data = project, boxCardModifier)
             Spacer(modifier = Modifier.height(10.dp))
         }
