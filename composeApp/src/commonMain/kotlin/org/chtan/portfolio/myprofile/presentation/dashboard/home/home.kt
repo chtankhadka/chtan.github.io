@@ -94,7 +94,8 @@ fun home(choosenSkills: MyDropDownItems) {
                 ) {
                         AsyncImage(
                             modifier = Modifier.align(alignment = Alignment.Center).padding(10.dp).clip(shape = RoundedCornerShape(10)).size(300.dp),
-                            model = "https://scontent.fsou1-1.fna.fbcdn.net/v/t39.30808-6/520092422_1542752410473335_5806185386542453646_n.jpg?stp=cp6_dst-jpegr_tt6&_nc_cat=100&ccb=1-7&_nc_sid=f727a1&_nc_ohc=cyJdSvdxp7wQ7kNvwEXiP6e&_nc_oc=AdkuOs8m90_aJXqJzBfCKoR5PZgbuJkM-vwzmjg8wRD-Pcbu6np-WyLSbIRQ23bbw5nwIF1Pz7lVQymXGkY1kJ2g&_nc_zt=23&se=-1&_nc_ht=scontent.fsou1-1.fna&_nc_gid=T8YIdTT00KdKbWK1Fz--7A&oh=00_AfSwa-3LJbPsVF28VfmXjxSynKvEwapRdYi6h9eNHtamPA&oe=688096CE",
+                            model =
+"https://chtanportfolio.s3.eu-north-1.amazonaws.com/pp.jpg",
                             contentDescription = "Image",
                             contentScale = ContentScale.Crop
 
@@ -265,7 +266,8 @@ fun myPager(data: ProjectDetail, boxCardModifier: Modifier) {
                 }
 
                 Text(
-                    text = data.projectDescription
+                    text = data.projectDescription,
+                    maxLines = 10
                 )
                 Spacer(modifier = Modifier.height(10.dp))
                 Text(
