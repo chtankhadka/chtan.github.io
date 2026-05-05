@@ -41,6 +41,7 @@ import org.jetbrains.compose.resources.painterResource
 import portfolio.composeapp.generated.resources.Res
 import portfolio.composeapp.generated.resources.test
 
+
 @Composable
 fun Ideas(boxCardModifier: Modifier) {
     Column(modifier = Modifier.fillMaxSize()) {

@@ -49,6 +49,7 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil3.compose.AsyncImage
 import kotlinx.coroutines.launch
 import org.chtan.portfolio.myprofile.data.MyLocalData
 import org.chtan.portfolio.myprofile.data.ProjectDetail
@@ -77,7 +78,8 @@ fun Home(choosenSkills: MyDropDownItems, boxCardModifier: Modifier) {
             Res.drawable.icons8_linkedin to "https://www.linkedin.com/feed/"
         )
         // My descriptions
-        Box( modifier = Modifier.fillMaxSize()// or a fixed height like 420.dp
+        Box(
+            modifier = Modifier.fillMaxSize()// or a fixed height like 420.dp
         ) {
             Image(
                 modifier = Modifier.fillMaxSize().height(IntrinsicSize.Min),
@@ -87,8 +89,7 @@ fun Home(choosenSkills: MyDropDownItems, boxCardModifier: Modifier) {
             )
             Row(
                 modifier = Modifier.fillMaxSize(), verticalAlignment = Alignment.CenterVertically
-            )
-            {
+            ) {
                 FlowRow(
                     modifier = Modifier.padding(8.dp).weight(1f),
                     horizontalArrangement = Arrangement.SpaceAround,
@@ -98,20 +99,20 @@ fun Home(choosenSkills: MyDropDownItems, boxCardModifier: Modifier) {
                     Box(
                         modifier = boxCardModifier
                     ) {
-//                    AsyncImage(
-//                        modifier = Modifier.fillMaxWidth().align(alignment = Alignment.Center)
-//                            .padding(10.dp).clip(shape = RoundedCornerShape(10)),
-//                        model = "https://chtanportfolio.s3.eu-north-1.amazonaws.com/pp.jpg",
-//                        contentDescription = "Image",
-//                        contentScale = ContentScale.Crop
-//                    )
-                        Image(
+                        AsyncImage(
                             modifier = Modifier.fillMaxWidth().align(alignment = Alignment.Center)
                                 .padding(10.dp).clip(shape = RoundedCornerShape(10)),
-                            painter = painterResource(Res.drawable.test),
+                            model = "https://chtanportfolio.s3.eu-north-1.amazonaws.com/pp.jpg",
                             contentDescription = "Image",
                             contentScale = ContentScale.Crop
                         )
+//                        Image(
+//                            modifier = Modifier.fillMaxWidth().align(alignment = Alignment.Center)
+//                                .padding(10.dp).clip(shape = RoundedCornerShape(10)),
+//                            painter = painterResource(Res.drawable.test),
+//                            contentDescription = "Image",
+//                            contentScale = ContentScale.Crop
+//                        )
                     }
 
                     Column(
@@ -136,8 +137,7 @@ fun Home(choosenSkills: MyDropDownItems, boxCardModifier: Modifier) {
 //                                    }
                                     append("having High level experience in mobile app development with 3 years of experience and data analysis with 6 months of experience, and producing quality work")
                                 }
-                            }
-                        )
+                            })
 
                     }
 
@@ -192,23 +192,26 @@ fun MyPager(data: ProjectDetail, boxCardModifier: Modifier) {
             modifier = boxCardModifier, horizontalAlignment = Alignment.CenterHorizontally
         ) {
             HorizontalPager(
-                state = pagerState, modifier = Modifier.fillMaxSize(),
+                state = pagerState,
+                modifier = Modifier.fillMaxSize(),
                 contentPadding = PaddingValues(end = 40.dp)
             ) { page ->
-//                            AsyncImage(
-//                                modifier = Modifier.fillMaxSize().align(Alignment.Center),
-//                                model = data.projectImage[page],
-//                                contentDescription = null,
-//                            )
-
-                Image(
-                    modifier = Modifier.size(400.dp)
-                        .padding(10.dp)
+                AsyncImage(
+                    modifier = Modifier.size(400.dp).padding(10.dp)
                         .clip(shape = RoundedCornerShape(5)),
-                    painter = painterResource(Res.drawable.test),
+                    model = data.projectImage[page],
                     contentScale = ContentScale.Crop,
                     contentDescription = null,
                 )
+
+//                Image(
+//                    modifier = Modifier.size(400.dp)
+//                        .padding(10.dp)
+//                        .clip(shape = RoundedCornerShape(5)),
+//                    painter = painterResource(Res.drawable.test),
+//                    contentScale = ContentScale.Crop,
+//                    contentDescription = null,
+//                )
 
             }
             Spacer(modifier = Modifier.height(10.dp))
@@ -285,12 +288,12 @@ fun GlowingPagerDot(
 
     Box(
         modifier = modifier.padding(10.dp)                    // Extra space for glow to breathe
-            .size(dotSize + 10.dp).graphicsLayer {
-                scaleX = if (isSelected) glowPulse else 1f
-                scaleY = if (isSelected) glowPulse else 1f
-            }.clickable {
-                onClickPagerDot()
-            }) {
+        .size(dotSize + 10.dp).graphicsLayer {
+            scaleX = if (isSelected) glowPulse else 1f
+            scaleY = if (isSelected) glowPulse else 1f
+        }.clickable {
+            onClickPagerDot()
+        }) {
         // Soft outer glow layer
         if (isSelected) {
             Box(
