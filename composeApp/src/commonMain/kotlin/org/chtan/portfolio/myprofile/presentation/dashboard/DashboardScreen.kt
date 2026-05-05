@@ -4,30 +4,20 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.LocalAbsoluteTonalElevation
-import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
-import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -38,9 +28,6 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
@@ -54,7 +41,10 @@ import org.chtan.portfolio.app.LottieCard
 import org.chtan.portfolio.myprofile.data.MyTopBar
 import org.chtan.portfolio.myprofile.presentation.components.DropdownMySkills
 import org.chtan.portfolio.myprofile.presentation.components.MyDropDownItems
-import org.chtan.portfolio.myprofile.presentation.dashboard.home.home
+import org.chtan.portfolio.myprofile.presentation.dashboard.home.Home
+import org.chtan.portfolio.myprofile.presentation.dashboard.ideas.Ideas
+import org.chtan.portfolio.myprofile.presentation.utils.addResizeListener
+import org.chtan.portfolio.myprofile.presentation.utils.getWindowHeightWidth
 import org.jetbrains.compose.resources.Font
 import portfolio.composeapp.generated.resources.ArianaVioleta_dz2K
 import portfolio.composeapp.generated.resources.Res
@@ -63,6 +53,8 @@ import portfolio.composeapp.generated.resources.Res
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DashboardScreen(nav: NavHostController) {
+
+
     val mySkills = listOf(
         MyDropDownItems.Both,
         MyDropDownItems.AppDeveloper,
@@ -76,6 +68,15 @@ fun DashboardScreen(nav: NavHostController) {
     val bottomNavController = rememberNavController()
 
 
+    val viewWidhtHeight = remember { mutableStateOf<Pair<Int, Int>>(getWindowHeightWidth()) }
+
+    addResizeListener { viewport ->
+        viewWidhtHeight.value = viewport
+    }
+
+    // if screen is big, the box width will be for pic is 400dp else it will be full width
+    val boxCardModifier =
+        if (viewWidhtHeight.value.first > 450) Modifier.width(450.dp) else Modifier.fillMaxWidth()
 
 
     Scaffold(topBar = {
@@ -120,10 +121,11 @@ fun DashboardScreen(nav: NavHostController) {
                             }) {
                                 Text(
                                     text = screen.label,
-                                    style = if (isSelected) MaterialTheme.typography.headlineLarge.copy(
+                                    style = if (isSelected) MaterialTheme.typography.headlineMedium.copy(
                                         shadow = Shadow(
-                                            offset = Offset(2f,2f),
-                                            blurRadius = 0.5f,
+                                            color = Color(0xFF00FFFF),
+                                            blurRadius = 12f,
+                                            offset = Offset(8f,3f)
                                         )
                                     ) else MaterialTheme.typography.headlineMedium
                                 )
@@ -181,7 +183,7 @@ fun DashboardScreen(nav: NavHostController) {
                 modifier = Modifier.padding(horizontal = 3.dp)
             ) {
                 composable("home") {
-                    home(selectedItem)
+                    Home(selectedItem,boxCardModifier)
                 }
                 composable("about_me") {
 
@@ -189,7 +191,9 @@ fun DashboardScreen(nav: NavHostController) {
                 composable("skills") {
 
                 }
-                composable("ideas") {  }
+                composable("ideas") {
+                    Ideas(boxCardModifier)
+                }
             }
         }
 

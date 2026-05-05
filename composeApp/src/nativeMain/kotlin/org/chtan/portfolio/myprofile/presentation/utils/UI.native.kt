@@ -1,9 +1,19 @@
 package org.chtan.portfolio.myprofile.presentation.utils
 
+import kotlinx.cinterop.ExperimentalForeignApi
+import kotlinx.cinterop.useContents
+import platform.UIKit.UIScreen
+
+@OptIn(ExperimentalForeignApi::class)
 actual fun getWindowHeightWidth(): Pair<Int, Int> {
-    TODO("Not yet implemented")
+    val mainScreen = UIScreen.mainScreen
+    val bounds = mainScreen.bounds
+    return bounds.useContents {
+        size.width.toInt() to size.height.toInt()
+    }
 }
 
 actual fun addResizeListener(onResize: (Pair<Int, Int>) -> Unit) {
-    TODO("Not yet implemented")
+    // On iOS, resize events are typically handled via orientation changes or view layout updates.
+    // For a simple implementation, we can leave this as a no-op or implement it using notifications if needed.
 }

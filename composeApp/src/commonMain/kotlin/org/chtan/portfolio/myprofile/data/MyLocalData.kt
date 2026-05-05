@@ -31,9 +31,24 @@ data class ProjectDetail(
 //projectNote = ""
 //),
 
+data class DetailedDescription(
+    val title: String?,
+    val imageLink: String?,
+    val videoLink: String?,
+    val description: String?
+)
+
+data class IdeaDetails(
+    val ideaName: String,
+    val author: String?,
+    val ideaDate: String?,
+    val ideaDescription: String?,
+    val progress: String?,
+    val detailedDescription: List<DetailedDescription>? = null
+)
 
 object MyLocalData {
-    val listOfAPPSkills = listOf<ProjectDetail>(
+    val listOfAPPSkills = listOf(
         ProjectDetail(
             projectName = "Momo Bar",
             projectDescription = "Used for a food ordering app where users can order food, request delivery times, and hotels can view customer locations.",
@@ -111,13 +126,13 @@ object MyLocalData {
         ),
         ProjectDetail(
             projectName = "EV Dashboard",
-            projectDescription ="Analysed data to shows EV data with 85,802 Battery Electric Vehicles outnumbering 26,482 Plug-in Hybrids, a strong presence in King County (58,965) led by Tesla (51,997), and a peak adoption of 25,421 vehicles in 2023, indicating growing demand.",
+            projectDescription = "Analysed data to shows EV data with 85,802 Battery Electric Vehicles outnumbering 26,482 Plug-in Hybrids, a strong presence in King County (58,965) led by Tesla (51,997), and a peak adoption of 25,421 vehicles in 2023, indicating growing demand.",
             projectTechnologies = "Tableau",
             projectImage = listOf<String>(
-               "https://chtanportfolio.s3.eu-north-1.amazonaws.com/evDashboard.png",
+                "https://chtanportfolio.s3.eu-north-1.amazonaws.com/evDashboard.png",
             ),
             projectLink = null,
-            projectSourceCode ="https://drive.google.com/drive/folders/1WPUxB-JRxMiE3RcBzfNMeIpWRo5xsyGp?usp=drive_link",
+            projectSourceCode = "https://drive.google.com/drive/folders/1WPUxB-JRxMiE3RcBzfNMeIpWRo5xsyGp?usp=drive_link",
             projectType = "Data",
             projectSubType = "tableau",
             projectNote = "",
@@ -179,6 +194,37 @@ object MyLocalData {
         )
 
 
+    )
+
+
+    val listOfIdeas = listOf(
+        IdeaDetails(
+            ideaName = "Hydrogen Satellite",
+            author = "Chetan Khadka",
+            ideaDate = "05-04-2026",
+            ideaDescription = "this is the best solution",
+            progress = "100%",
+            detailedDescription = listOf(
+                DetailedDescription(
+                    title = "how it works",
+                    imageLink = "",
+                    videoLink = null,
+                    description = "this is the best solution"
+                ),
+                DetailedDescription(
+                    title = "how it works",
+                    imageLink = "",
+                    videoLink = null,
+                    description = "this is the best solution"
+                ),
+                DetailedDescription(
+                    title = "how it works",
+                    imageLink = "",
+                    videoLink = null,
+                    description = "this is the best solution"
+                )
+            )
+        )
     )
 }
 
