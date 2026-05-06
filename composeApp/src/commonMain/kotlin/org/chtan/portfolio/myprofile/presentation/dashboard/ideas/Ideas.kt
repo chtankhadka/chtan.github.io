@@ -32,6 +32,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil3.compose.AsyncImage
 import org.chtan.portfolio.myprofile.data.IdeaDetails
 import org.chtan.portfolio.myprofile.data.MyLocalData
 import org.chtan.portfolio.myprofile.presentation.theme.outlineDark
@@ -75,21 +76,24 @@ fun Ideas(boxCardModifier: Modifier) {
                         itemVerticalAlignment = Alignment.Top
 
                     ) {
-                        Image(
+                        AsyncImage(
                             modifier = Modifier.size(400.dp).padding(10.dp)
                                 .clip(shape = RoundedCornerShape(5)),
-                            painter = painterResource(Res.drawable.test),
+                            model = item.imageLink?:"",
                             contentScale = ContentScale.Crop,
                             contentDescription = null,
                         )
+//                        Image(
+//                            modifier = Modifier.size(400.dp).padding(10.dp)
+//                                .clip(shape = RoundedCornerShape(5)),
+//                            painter = painterResource(Res.drawable.test),
+//                            contentScale = ContentScale.Crop,
+//                            contentDescription = null,
+//                        )
                         Text(
                             modifier = Modifier.weight(1f).widthIn(min = 200.dp), text = buildAnnotatedString {
                                 withStyle(style = ParagraphStyle(lineHeight = 30.sp)) {
-                                    withStyle(style = SpanStyle(color = primaryLight)) {
-                                        append("Application Developer & Data Analyst ")
-                                    }
-//
-                                    append("having High level experience in mobile app development with 3 years of experience and data analysis with 6 months of experience, and producing quality work")
+                                        append("${item.ideaDescription}")
                                 }
                             })
                     }
@@ -104,10 +108,10 @@ fun Ideas(boxCardModifier: Modifier) {
                         // detailed descriptions
                         item.detailedDescription?.forEach { detailedDescription ->
                             detailedDescription.imageLink?.let {
-                                Image(
-                                    modifier = Modifier.size(300.dp).padding(10.dp)
+                                AsyncImage(
+                                    modifier = Modifier.size(400.dp).padding(10.dp)
                                         .clip(shape = RoundedCornerShape(5)),
-                                    painter = painterResource(Res.drawable.test),
+                                    model = detailedDescription.imageLink?:"",
                                     contentScale = ContentScale.Crop,
                                     contentDescription = null,
                                 )
@@ -123,16 +127,9 @@ fun Ideas(boxCardModifier: Modifier) {
                                 text = buildAnnotatedString {
                                     withStyle(style = ParagraphStyle(lineHeight = 30.sp)) {
                                         withStyle(style = SpanStyle(color = primaryLight)) {
-                                            append("Application Developer & Data Analyst ")
+                                            append("${detailedDescription.title} ")
                                         }
-//                                    withStyle(
-//                                        style = SpanStyle(
-//                                            fontWeight = FontWeight.Bold, color = Color.Red
-//                                        )
-//                                    ) {
-//                                        append("World\n")
-//                                    }
-                                        append("having High level experience in mobile app development with 3 years of experience and data analysis with 6 months of experience, and producing quality work")
+                                        append("${detailedDescription.description}")
                                     }
                                 })
                         }
@@ -140,6 +137,7 @@ fun Ideas(boxCardModifier: Modifier) {
 
                     }
                 }
+                Spacer(modifier = Modifier.height(10.dp))
             }
 
         }

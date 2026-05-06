@@ -32,16 +32,14 @@ data class ProjectDetail(
 //),
 
 data class DetailedDescription(
-    val title: String?,
-    val imageLink: String?,
-    val videoLink: String?,
-    val description: String?
+    val title: String?, val imageLink: String?, val videoLink: String?, val description: String?
 )
 
 data class IdeaDetails(
     val ideaName: String,
     val author: String?,
     val ideaDate: String?,
+    val imageLink: String?,
     val ideaDescription: String?,
     val progress: String?,
     val detailedDescription: List<DetailedDescription>? = null
@@ -85,11 +83,9 @@ object MyLocalData {
             projectNote = "",
             color = Color(108, 138, 186),
             fontColor = Color.Blue
-        ),
-        ProjectDetail(
+        ), ProjectDetail(
             projectName = "Popeyes Overview",
-            projectDescription =
-                "Popeyes and Deliveroo data are analyzed to extract key information, enabling us to predict peak hours and prepare for upcoming delivery orders.",
+            projectDescription = "Popeyes and Deliveroo data are analyzed to extract key information, enabling us to predict peak hours and prepare for upcoming delivery orders.",
             projectTechnologies = "Tableau, Google Sheets etc",
             projectImage = listOf<String>(
                 "https://chtanportfolio.s3.eu-north-1.amazonaws.com/gsPop1.png",
@@ -97,8 +93,7 @@ object MyLocalData {
                 "https://chtanportfolio.s3.eu-north-1.amazonaws.com/gsPop3.png",
             ),
             projectLink = null,
-            projectSourceCode =
-                "https://drive.google.com/drive/folders/1keT1F-RQo1T1KmP_WO0kZprmuvhSTPTF?usp=sharing",
+            projectSourceCode = "https://drive.google.com/drive/folders/1keT1F-RQo1T1KmP_WO0kZprmuvhSTPTF?usp=sharing",
             projectType = "Data",
             projectSubType = "googlesheet",
             projectNote = "",
@@ -123,8 +118,7 @@ object MyLocalData {
             projectNote = "",
             color = Color(201, 240, 187),
             fontColor = Color(76, 96, 10)
-        ),
-        ProjectDetail(
+        ), ProjectDetail(
             projectName = "EV Dashboard",
             projectDescription = "Analysed data to shows EV data with 85,802 Battery Electric Vehicles outnumbering 26,482 Plug-in Hybrids, a strong presence in King County (58,965) led by Tesla (51,997), and a peak adoption of 25,421 vehicles in 2023, indicating growing demand.",
             projectTechnologies = "Tableau",
@@ -175,8 +169,7 @@ object MyLocalData {
             projectNote = "",
             color = Color(220, 230, 245),
             fontColor = Color.Gray
-        ),
-        ProjectDetail(
+        ), ProjectDetail(
             projectName = "Talk More",
             projectDescription = "focused on dating sites with some new privacy technology and fun.",
             projectTechnologies = "Kotlin, Koin, Jetpack Compose, Lottie Animation, Git, Google Map and Apple Map etc.",
@@ -199,29 +192,28 @@ object MyLocalData {
 
     val listOfIdeas = listOf(
         IdeaDetails(
-            ideaName = "Hydrogen Satellite",
+            ideaName = "Ultra Low-Cost Near-Space Balloon Platform for Village Monitoring",
             author = "Chetan Khadka",
-            ideaDate = "05-04-2026",
-            ideaDescription = "this is the best solution",
-            progress = "100%",
+            ideaDate = "06-05-2026",
+            imageLink = "https://assets.grok.com/users/5c85631b-a47c-43ef-8080-dbbbe11d99eb/generated/6aa4a14b-a9c8-4c07-bdb5-3de8ffb5bd32/preview_image.jpg?cache=1",
+            ideaDescription = "A handmade stratospheric balloon platform designed for remote mountain villages. The system combines a helium balloon with a small fan mechanism for lift assistance and height control. It operates without balloon burst and reaches 25–35 km altitude. The platform supports village security, wildlife tracking, disaster early warning, and high-altitude Earth observation.",
+            progress = "20%",
             detailedDescription = listOf(
                 DetailedDescription(
-                    title = "how it works",
-                    imageLink = "",
+                    title = "System Description",
+                    imageLink = null,
                     videoLink = null,
-                    description = "this is the best solution"
-                ),
-                DetailedDescription(
-                    title = "how it works",
-                    imageLink = "",
+                    description = "" + "The platform uses a helium-filled balloon for primary lift while a small fan/propeller system provides additional support and stability. Height is maintained by adjusting air inside the balloon and controlling fan speed, eliminating the need for balloon burst. The payload includes solar panels for continuous power, a camera for live imaging, GPS tracking, and a parachute for safe recovery and reuse."
+                ), DetailedDescription(
+                    title = "Operational Features",
+                    imageLink = null,
                     videoLink = null,
-                    description = "this is the best solution"
-                ),
-                DetailedDescription(
-                    title = "how it works",
-                    imageLink = "",
+                    description = "The system reaches 25–35 km altitude (edge of space) and stays aloft for several hours to 1–2 days per flight. It is designed for wide-area security monitoring, wildlife tracking, flood and landslide detection, and high-resolution Earth photography. Solar panels with battery backup provide power, and the parachute with GPS ensures safe recovery"
+                ), DetailedDescription(
+                    title = "Advantages",
+                    imageLink = null,
                     videoLink = null,
-                    description = "this is the best solution"
+                    description = "The fan assistance significantly reduces helium consumption. The payload is fully reusable, enabling multiple flights. It offers wide coverage ideal for mountainous terrain, remains portable for village launches, and supports both practical local monitoring and space-related research."
                 )
             )
         )
@@ -229,8 +221,7 @@ object MyLocalData {
 }
 
 sealed class MyTopBar(
-    val label: String,
-    val id: String
+    val label: String, val id: String
 ) {
     data object Home : MyTopBar(label = "Home", id = "home")
     data object About : MyTopBar(label = "About Me", id = "about_me")
