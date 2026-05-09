@@ -127,7 +127,7 @@ fun Ideas(boxCardModifier: Modifier) {
                                 text = buildAnnotatedString {
                                     withStyle(style = ParagraphStyle(lineHeight = 30.sp)) {
                                         withStyle(style = SpanStyle(color = primaryLight)) {
-                                            append("${detailedDescription.title} ")
+                                            append("${detailedDescription.title} \n")
                                         }
                                         append("${detailedDescription.description}")
                                     }
