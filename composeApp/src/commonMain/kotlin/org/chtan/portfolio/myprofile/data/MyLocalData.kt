@@ -192,6 +192,96 @@ object MyLocalData {
 
     val listOfIdeas = listOf(
         IdeaDetails(
+            ideaName = "REAL-WORLD REMOTE METAVERSE",
+            author = "Chetan Khadka",
+            ideaDate = "06-05-2026",
+            imageLink = "https://chtanportfolio.s3.eu-north-1.amazonaws.com/miniworld.png",
+            ideaDescription = "This is not just RC cars on a playground.\n" +
+                    "This is a global, internet-controlled real-world metaverse where anyone — from the UK, USA, or anywhere — can rent and fully control real RC cars, drones, boats, and advanced robots in physical miniature maps located in Nepal (and soon worldwide).\n" +
+                    "Live HD camera + mic + speaker gives a true first-person experience: feel the wind, hear real river sounds, watch chickens and goats up close, explore jungles, dive underwater, or battle in epic robot wars — all for just \$2–5 per hour.\n" +
+                    "It merges your previous ideas (Near-Space Balloon, ESP32 offline network, offline chat, NFC feedback) into one powerful ecosystem. Franchise owners build their own maps and buy equipment from you. Landowners lease unproductive plots for new maps. Maintenance is done locally in Nepal at low cost.\n" +
+                    "Result: Education, entertainment, jobs, nature reconnection, research, and real-life gaming — all ultra-cheap and accessible to children, students, seniors, farmers, and gamers worldwide.",
+            progress = "50%",
+            detailedDescription = listOf(
+                DetailedDescription(
+                    title = "Problems We Were Facing",
+                    imageLink = null,
+                    videoLink = null,
+                    description = "Traditional hobbies, education, and entertainment have serious limitations:\n" +
+                            "\n" +
+                            "RC hobbyists & racers are stuck with short-range radio control — you must be physically present.\n" +
+                            "Students in cities (UK, USA, Europe) have never seen real chickens, goats, cows, rivers, or jungles — only videos or VR.\n" +
+                            "Farmers & researchers lack affordable, real-time tools for agriculture monitoring, pest control, or underwater studies.\n" +
+                            "Land in Nepal (and many places) stays unused or gives poor crops because owners lack resources or ideas.\n" +
+                            "Entertainment feels fake in pure digital games; people crave real physics, real sounds, real nature.\n" +
+                            "Remote areas suffer from high costs and limited access to global opportunities."
+                ),
+                DetailedDescription(
+                    title = "Our Solution – The Real-World Remote Metaverse",
+                    imageLink = null,
+                    videoLink = null,
+                    description = "We create physical miniature adventure maps (roads, rivers, farms, jungles, battle arenas) equipped with internet-controlled vehicles:\n" +
+                            "\n" +
+                            "Full internet control (WebRTC + MQTT/WebSockets) — no radio range limits.\n" +
+                            "Every vehicle has live camera, microphone & speaker.\n" +
+                            "Users pay a small rental fee → choose map + vehicle → control in real time from anywhere.\n" +
+                            "Franchise model: Anyone buys equipment from you, builds their map, registers it on the global platform.\n" +
+                            "You export hardware kits, software, and standards.\n" +
+                            "Local maintenance teams in Nepal keep costs low.\n" +
+                            "Landowners lease unused plots → you reconstruct exciting maps.\n" +
+                            "\n" +
+                            "Like NASA rovers on Mars — but cheap, real, and for everyone."
+                ),
+                DetailedDescription(
+                    title = "Core Features",
+                    imageLink = null,
+                    videoLink = null,
+                    description = "Vehicles & Machines: RC cars, drones, boats, tractors, cranes, advanced battle robots.\n" +
+                            "Live Experience: Real-time video/audio — hear birds, feel the terrain, talk to others.\n" +
+                            "Adventure & Gaming: Build roads/houses, farming missions, spy missions, PUBG-style battles, robot wars, RC races.\n" +
+                            "Educational Exploration: Visit real villages, crops, rivers, wildlife, mini ecosystems (insects, worms, rats in soil).\n" +
+                            "Underwater Research: RC boats with underwater cameras for rivers and ponds.\n" +
+                            "Social & Franchise: Proximity chat, cooperative missions, live YouTube streaming (earn money), NFC instant ratings.\n" +
+                            "Safety & Offline Backup: Speed limits, kill switches, ESP32 mesh network for unstable internet."
+                ),
+                DetailedDescription(
+                    title = "How It Works (User Journey)",
+                    imageLink = null,
+                    videoLink = null,
+                    description = "User logs in via KMP app or web (from UK).\n" +
+                            "Browses available maps (your Nepal map or franchise sites).\n" +
+                            "Pays small rental (\$2–5/hour) → selects car/drone/boat.\n" +
+                            "Takes full internet control — drives, flies, dives, explores, builds, battles.\n" +
+                            "Records videos or live streams on YouTube and earns.\n" +
+                            "Franchise owners earn from rentals + maintenance fees.\n" +
+                            "You earn from equipment sales, platform fees, and exports."
+                ),
+                DetailedDescription(
+                    title = "Franchise & Global Model",
+                    imageLink = null,
+                    videoLink = null,
+                    description = "You sell complete kits (vehicles, cameras, software).\n" +
+                            "Anyone with land builds their themed map (city, jungle, farm, battle arena).\n" +
+                            "They register on your platform → global users can access.\n" +
+                            "Maintenance handled locally (cheap in Nepal).\n" +
+                            "Unproductive land becomes valuable leased maps.\n" +
+                            "Creates jobs in hardware assembly, maintenance, map building, and tourism."
+                ),
+                DetailedDescription(
+                    title = "Benefits & Massive Impact",
+                    imageLink = null,
+                    videoLink = null,
+                    description = "Educational: Children & students experience real nature — real sounds of rivers, real animals, real mini ecosystems.\n" +
+                            "Entertainment: Real-life PUBG, Clash of Clans, races, battles — feels 100% real.\n" +
+                            "Research: Cheap agriculture monitoring, underwater studies, environmental data.\n" +
+                            "Economic: Jobs in Nepal, new income for landowners, YouTube creators, global users.\n" +
+                            "Social & Environmental: Reconnects people with nature, uses land sustainably, ultra-low cost (\$2–5/hr).\n" +
+                            "Inclusive: Kids, seniors, uneducated farmers, students, gamers — everyone benefits."
+                )
+            )
+
+        ),
+        IdeaDetails(
             ideaName = "Ultra Low-Cost Near-Space Balloon Platform for Village Monitoring",
             author = "Chetan Khadka",
             ideaDate = "06-05-2026",
