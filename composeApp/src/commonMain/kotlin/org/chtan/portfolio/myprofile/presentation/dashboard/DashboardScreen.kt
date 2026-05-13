@@ -41,6 +41,7 @@ import org.chtan.portfolio.app.LottieCard
 import org.chtan.portfolio.myprofile.data.MyTopBar
 import org.chtan.portfolio.myprofile.presentation.components.DropdownMySkills
 import org.chtan.portfolio.myprofile.presentation.components.MyDropDownItems
+import org.chtan.portfolio.myprofile.presentation.dashboard.about.About
 import org.chtan.portfolio.myprofile.presentation.dashboard.home.Home
 import org.chtan.portfolio.myprofile.presentation.dashboard.ideas.Ideas
 import org.chtan.portfolio.myprofile.presentation.utils.addResizeListener
@@ -186,6 +187,7 @@ fun DashboardScreen(nav: NavHostController) {
                     Home(selectedItem,boxCardModifier)
                 }
                 composable("about_me") {
+                    About()
 
                 }
                 composable("skills") {

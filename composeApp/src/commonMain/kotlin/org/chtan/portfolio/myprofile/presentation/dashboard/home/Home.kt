@@ -39,6 +39,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.graphicsLayer
@@ -60,6 +61,7 @@ import org.chtan.portfolio.myprofile.presentation.theme.primaryLight
 import org.chtan.portfolio.myprofile.presentation.utils.openLink
 import org.jetbrains.compose.resources.painterResource
 import portfolio.composeapp.generated.resources.Res
+import portfolio.composeapp.generated.resources.aboutme
 import portfolio.composeapp.generated.resources.icons8_facebook
 import portfolio.composeapp.generated.resources.icons8_github
 import portfolio.composeapp.generated.resources.icons8_linkedin
@@ -81,12 +83,16 @@ fun Home(choosenSkills: MyDropDownItems, boxCardModifier: Modifier) {
         Box(
             modifier = Modifier.fillMaxSize()// or a fixed height like 420.dp
         ) {
-            Image(
-                modifier = Modifier.fillMaxSize().height(IntrinsicSize.Min),
-                painter = painterResource(Res.drawable.test),
-                contentDescription = null,
-                contentScale = ContentScale.Crop
-            )
+//            Image(
+//                modifier = Modifier.fillMaxSize().height(IntrinsicSize.Min),
+//                painter = painterResource(Res.drawable.test),
+//                contentDescription = null,
+//                contentScale = ContentScale.Crop
+//
+//            )
+
+            // Background image that scrolls slower
+
             Row(
                 modifier = Modifier.fillMaxSize(), verticalAlignment = Alignment.CenterVertically
             ) {
